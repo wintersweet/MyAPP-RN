@@ -1,37 +1,53 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react'
 import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-} from 'react-native';
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image
+} from 'react-native'
+import CoinView from './Others/CoinView'
+import VectorIcon from 'react-native-vector-icons/MaterialIcons'
 
 export default class Type extends Component {
+  render () {
+    let data = [
+      { title: 'BTC', data: ['24808.76 CNY'] },
+      { title: 'ETH', data: ['24808.76 CNY'] }
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.button} activeOpacity={0.5}>
-                    <Text style={{color: 'white'}}>分类</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+    ]
+    return (
+      <View style={styles.container}>
+        <View style={styles.containerWap}>
+          {
+            data.map(item => <CoinView title={item.title} detailText={item.data} key={item.title} />)
+          }
+        </View>
+        <View style={styles.containerWap}>
+          {
+            data.map(item => <CoinView title={item.title} detailText={item.data} key={item.title} />)
+          }
+        </View>
+        <View style={styles.containerWap}>
+          {
+            data.map(item => <CoinView title={item.title} detailText={item.data} key={item.title} />)
+          }
+        </View>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    button: {
-        width: 120,
-        height: 45,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#4398ff',
-    }
-});
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  containerWap: {
+    // flex: 1,
+    flexDirection: 'row'
+  }
+})

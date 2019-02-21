@@ -9,11 +9,12 @@ import type from './src/Type'
 import shopCar from './src/ShopCar'
 import mine from './src/Mine'
 import details from './src/Details'
+import test from './src/Test'
 // ***导航和Tab***/
 const HomeStack = createStackNavigator(
   {
     Base: home,
-    Profile: details
+    Profile: test
   },
   {
     defaultNavigationOptions: {
