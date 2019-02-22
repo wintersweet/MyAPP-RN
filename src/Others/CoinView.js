@@ -1,14 +1,25 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  FlatList
 } from 'react-native'
 import VectorIcon from 'react-native-vector-icons/MaterialIcons'
 var Dimensions = require('Dimensions')
 var screenWidth = Dimensions.get('window').width
+
+let data2 = [
+  { key: 'Devin' },
+  { key: 'Jackson' },
+  { key: 'James' },
+  { key: 'Tom' },
+  { key: 'Jack' },
+  { key: 'Jone' }
+]
 export default class CoinView extends Component {
   constructor (props) {
     super(props)
@@ -21,31 +32,53 @@ export default class CoinView extends Component {
   }
   render () {
     return (
-      <View style={styles.containStyle} >
-        <Image source={require('../../images/crypto1.png')} style={styles.image} />
-        {this._renderRightView()}
+      <View style={styles.contain}>
+        {/* {this.renderRightView()} */}
+        {this.renderFlatListView()}
       </View>
 
     )
   }
-  _renderRightView () {
+  renderFlatListView () {
     return (
-      <View style={styles.rightViewStyle}>
-        <Text style={{ height: 20, marginTop: 5 }} >{this.props.title }</Text>
-        <Text style={{ height: 20 }} >{this.props.detailText }</Text>
+      <FlatList
+        data={data2}
+        renderItem={({ item }) => {
+          <View>
+            <Image source={require('../../images/crypto1.png')} style={styles.image} />
+            <Text style={{ height: 20, marginTop: 5 }} >{'111'}</Text>
+            <Text style={{ height: 20 }} >{'222' }</Text>
+          </View>
+        }
+        }
+        horizontal={false}
+        numColumns={2}
+      />
+    )
+  }
+  renderRightView () {
+    return (
+      <View style={styles.contain}>
+        <Image source={require('../../images/crypto1.png')} style={styles.image} />
+        <Text style={{ height: 20, marginTop: 5 }} >{'title' }</Text>
+        <Text style={{ height: 20 }} >{'detail' }</Text>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  containStyle: {
+  contain: {
     flex: 1,
+    flexDirection: 'row'
+  },
+  containStyle: {
+    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
     paddingLeft: 20,
-    // paddingRight: 10,
+    paddingRight: 10,
     paddingTop: 20,
     paddingBottom: 16,
     borderBottomColor: '#e8e8e8',

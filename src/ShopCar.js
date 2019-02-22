@@ -9,22 +9,35 @@ import {
 import MyCell from './Custom/MyCell'
 import CoinView from './Others/CoinView'
 export default class ShopCar extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      count: 100,
+      array: ['1', '2'],
+      dataTest: [
+        { title: '品牌车1', data: ['宝马', '奔驰', '奥迪'] },
+        { title: '类型2', data: ['跑车', '轿车', '商务车'] }
+      ]
+    }
+  }
+  componentDidMount () {
+  }
   render () {
-    let data = [
+    let dataArr = [
       { title: '品牌车', data: ['宝马', '奔驰', '奥迪'] },
-      { title: '类型', data: ['跑车', '轿车', 'SUV', '面包车', '商务车'] }
+      { title: '类型', data: ['跑车', '轿车', '商务车'] }
     ]
     return (
       <View style={styles.container}>
         <SectionList
-          sections={data}
+          sections={this.state.dataTest}
           renderSectionHeader={({ section }) =>
             <MyCell title={section.title} detailText={'去购买'} />
           }
           renderItem={({ item }) =>
             // <Text style={styles.item}> {item} </Text>
             <View>
-              <CoinView sstyle={styles.item} title={item} detailText={'100w首付'} />
+              <CoinView sstyle={styles.item} title={item} detailText={'100w首付'} name={'外部传的'} />
             </View>
           }
 

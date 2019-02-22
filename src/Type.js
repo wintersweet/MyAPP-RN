@@ -4,35 +4,39 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
+  FlatList
 } from 'react-native'
 import CoinView from './Others/CoinView'
 import VectorIcon from 'react-native-vector-icons/MaterialIcons'
-
+let data1 = [
+  { title: 'BTC', price: ['24808.76 CNY'] },
+  { title: 'ETH', price: ['24808.76 CNY'] },
+  { title: 'ETH', price: ['24808.76 CNY'] }
+]
+let data2 = [
+  { key: 'Devin' },
+  { key: 'Jackson' },
+  { key: 'James' },
+  { key: 'Tom' },
+  { key: 'Jack' },
+  { key: 'Jone' }
+]
 export default class Type extends Component {
   render () {
-    let data = [
-      { title: 'BTC', data: ['24808.76 CNY'] },
-      { title: 'ETH', data: ['24808.76 CNY'] }
-
-    ]
     return (
       <View style={styles.container}>
-        <View style={styles.containerWap}>
-          {
-            data.map(item => <CoinView title={item.title} detailText={item.data} key={item.title} />)
+        <CoinView
+        />
+        {/* <FlatList
+          data={data1}
+          renderItem={({ item }) =>
+            <Text>{item.title} </Text>
+
           }
-        </View>
-        <View style={styles.containerWap}>
-          {
-            data.map(item => <CoinView title={item.title} detailText={item.data} key={item.title} />)
-          }
-        </View>
-        <View style={styles.containerWap}>
-          {
-            data.map(item => <CoinView title={item.title} detailText={item.data} key={item.title} />)
-          }
-        </View>
+          horizontal={false}
+          numColumns={1}
+        /> */}
       </View>
     )
   }
@@ -40,11 +44,11 @@ export default class Type extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    flex: 1
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: '#F5FCFF'
   },
   containerWap: {
     // flex: 1,

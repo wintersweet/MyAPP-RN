@@ -14,7 +14,7 @@ import test from './src/Test'
 const HomeStack = createStackNavigator(
   {
     Base: home,
-    Profile: test
+    Profile: details
   },
   {
     defaultNavigationOptions: {
