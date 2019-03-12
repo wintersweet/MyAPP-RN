@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   SectionList
 } from 'react-native'
-import MyCell from './Custom/MyCell'
-import CoinView from './Others/CoinView'
+import MyCell from '../Custom/MyCell'
+import CoinView from '../Custom/MyAlert'
 export default class ShopCar extends Component {
   constructor (props) {
     super(props)
@@ -35,9 +35,8 @@ export default class ShopCar extends Component {
             <MyCell title={section.title} detailText={'去购买'} />
           }
           renderItem={({ item }) =>
-            // <Text style={styles.item}> {item} </Text>
             <View>
-              <CoinView sstyle={styles.item} title={item} detailText={'100w首付'} name={'外部传的'} />
+              <Text style={styles.item}> {item} </Text>
             </View>
           }
 

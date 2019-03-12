@@ -5,16 +5,18 @@ import { createBottomTabNavigator, createAppContainer, createStackNavigator } fr
 
 // 展示的页面
 import home from './src/Home/Home'
-import type from './src/Type'
-import shopCar from './src/ShopCar'
-import mine from './src/Mine'
+import type from './src/Types/Type'
+import shopCar from './src/Shops/ShopCar'
+import mine from './src/Mine/Mine'
 import details from './src/Details'
 import test from './src/Test'
+import homeTest from './src/Component/HomeTest'
 // ***导航和Tab***/
 const HomeStack = createStackNavigator(
   {
     Base: home,
-    Profile: details
+    Profile: details,
+    testPush: homeTest
   },
   {
     defaultNavigationOptions: {

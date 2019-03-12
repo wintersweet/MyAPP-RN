@@ -1,50 +1,50 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react'
 import {
-    View,Image,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    FlatList,SectionList,ScrollView,
-} from 'react-native';
-import MyAlertView from './Custom/MyAlert'
-import Button from './Custom/Button'
-import MyCell from './Custom/MyCell'
-var Dimensions = require('Dimensions');
-var screenWidth = Dimensions.get('window').width;
+  View, Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList, SectionList, ScrollView
+} from 'react-native'
+import MyAlertView from '../Custom/MyAlert'
+import Button from '../Custom/Button'
+import MyCell from '../Custom/MyCell'
+var Dimensions = require('Dimensions')
+var screenWidth = Dimensions.get('window').width
 export default class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
   render () {
     return (
-      <ScrollView style ={styles.scrollStyle}>
-        <View style= {styles.containerStyle}>
-              {/* {this._renderAlert() }
+      <ScrollView style={styles.scrollStyle}>
+        <View style={styles.containerStyle}>
+          {/* {this._renderAlert() }
                 <Text style={styles.welcome} onPress={() => this._show()}>
                     点我->弹出框
                 </Text> */}
-          <View style ={styles.sectionStyle} >
-            <MyCell title ={'扫一扫'} detailText={''} />
+          <View style={styles.sectionStyle} >
+            <MyCell title={'扫一扫'} detailText={''} />
           </View>
-          <View style= {styles.sectionStyle} >
-                  <MyCell title= {'省流量模式'} isSwitch={true} />
-            <MyCell title ={'我的订单'} detailText={'10个'} />
-            <MyCell title= {'邀请好友'} />
-            <MyCell title ={'清空缓存'} detailText={'1.8M'} />
+          <View style={styles.sectionStyle} >
+            <MyCell title={'省流量模式'} isSwitch />
+            <MyCell title={'我的订单'} detailText={'10个'} />
+            <MyCell title={'邀请好友'} />
+            <MyCell title={'清空缓存'} detailText={'1.8M'} />
           </View>
-          <View style ={styles.sectionStyle} >
-            <MyCell title= {'问卷调差'} />
-            <MyCell title ={'支付帮助'} />
-            <MyCell title ={'关于我们'} />
-            <MyCell title ={'精品应用'} detailText={''} />
+          <View style={styles.sectionStyle} >
+            <MyCell title={'问卷调差'} />
+            <MyCell title={'支付帮助'} />
+            <MyCell title={'关于我们'} />
+            <MyCell title={'精品应用'} detailText={''} />
           </View>
-              {/* {this._renderCommonCell()} */}
-              {/* <Button title={'登录'} /> */}
+          {/* {this._renderCommonCell()} */}
+          {/* <Button title={'登录'} /> */}
         </View>
 
       </ScrollView>
     )
-    }
+  }
   _renderAlert () {
     return (
-        <MyAlertView ref="alert" conformName={'确定1'} cancleName={'取消'}
+      <MyAlertView ref="alert" conformName={'确定1'} cancleName={'取消'}
         alertTitle={'温馨提示'} alertContent={'提醒的内容接啊哈哈哈。。。'}
         comformClik={() => {
           //  this._confirm()
@@ -59,8 +59,7 @@ export default class IScrolledDownAndWhatHappenedNextShockedMe extends Component
     return (
       <Text> 111</Text>
     )
-
- }
+  }
 
   _show = () => {
     this.refs.alert && this.refs.alert.showDialog()
