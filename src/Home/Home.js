@@ -7,7 +7,8 @@ import {
   ScrollView,
   FlatList,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native'
 import { createStackNavigator, createNavigationContainer, createAppContainer } from 'react-navigation'
 import CoinView from '../Others/CoinView'
@@ -15,6 +16,7 @@ import MyList from '../Others/MyList'
 import SectionOneView from '../Others/HomeSectionOne'
 import SectionThereView from '../Others/HomeSectioThere'
 import SectionTwoView from '../Others/HomeSectionTwo'
+import MyTestList from '../Others/MyTestList'
 var Dimensions = require('Dimensions')
 var screenWidth = Dimensions.get('window').width
 var REQUEST_URL =
@@ -29,6 +31,7 @@ export default class Home extends Component {
       loaded: false
     }
     this.fetchData = this.fetchData.bind(this)
+    this.onPressItem = this.onPressItem.bind(this)
   }
   componentWillMount () {
     console.log('aaaaa')
@@ -41,13 +44,27 @@ export default class Home extends Component {
     fetch(REQUEST_URL)
       .then(response => response.json())
       .then(responseData => {
-        // 注意，这里使用了this关键字，为了保证this在调用时仍然指向当前组件，我们需要对其进行“绑定”操作
         this.setState({
           data: this.state.data.concat(responseData.movies),
           loaded: true
         })
         console.log('成功了')
       })
+      .catch(err => {
+        this.setState({ error: err, loaded: false, refreshing: false })
+        console.log(err)
+      })
+  }
+  requestData = () => {
+
+  }
+  onPressItem (message) {
+    // Alert.alert('点击了' + message)
+    // this.props.navigation.push('testPush')
+    this.props.navigation.navigate('testPush', {
+      title: '传进来的参数',
+      otherParam: '呜哈哈'
+    })
   }
 
   render () {
@@ -64,7 +81,8 @@ export default class Home extends Component {
             <CoinView />
           </View>
           <View style={styles.sectionThere}>
-            <SectionThereView data={this.state.data} />
+            <SectionThereView data={this.state.data} onPressItem={this.onPressItem} />
+            {/* <MyTestList /> */}
           </View>
         </View>
       </ScrollView>

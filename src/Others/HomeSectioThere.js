@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-expressions */
 import React, { Component } from 'react'
 import {
@@ -23,7 +25,6 @@ let data2 = [
 ]
 export default class HomeSectionThere extends Component {
   _keyExtractor = (item, index) => item.id;
-
   constructor (props) {
     super(props)
     this.state = ({
@@ -53,6 +54,16 @@ export default class HomeSectionThere extends Component {
       { cancelable: false }
     )
   }
+  onPressItem = (id: string) => {
+    console.log('测试方法id')
+    this.props.onPressItem(this.props.id)
+  }
+  refreshing () {
+    let timer = setTimeout(() => {
+      clearTimeout(timer)
+      alert('刷新成功')
+    }, 1500)
+  }
   _onClickFuntion () {
     console.log('测试方法')
   }
@@ -62,9 +73,12 @@ export default class HomeSectionThere extends Component {
   renderFlatListView () {
     return (
       <FlatList
+        ref={(flatList) =>
+          this._flatList = flatList
+        }
         data={this.props.data}
         renderItem={({ item }) =>
-          <TouchableOpacity onPress={this._onPress}>
+          <TouchableOpacity onPress={this.onPressItem}>
             <View style={styles.containStyle}>
               <Image source={{ uri: item.posters.thumbnail }} style={styles.image} />
               <View style={styles.rightViewStyle}>
@@ -74,6 +88,8 @@ export default class HomeSectionThere extends Component {
             </View>
           </TouchableOpacity>
         }
+        onRefresh={this.refreshing}
+        refreshing={false}
         ListHeaderComponent={this.renderHeader}
         ListFooterComponent={this.renderFooterer}
         horizontal={false}
@@ -125,8 +141,9 @@ const styles = StyleSheet.create({
   },
   image: {
     marginTop: 5,
-    width: 45,
-    height: 45
+    width: 50,
+    height: 50,
+    borderRadius: 25
   },
   rightViewStyle: {
     marginLeft: 10

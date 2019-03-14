@@ -13,7 +13,7 @@ const SecondRoute = () => (
 )
 export default class TbaViewExamlpe extends React.Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
-      headerTitle: '第三级详情',
+      headerTitle: navigation.getParam('title', 'NO-ID'),
       gestureResponseDistance: { horizontal: 300 },
       headerBackTitle: null,
       headerTintColor: 'white'
@@ -26,6 +26,10 @@ export default class TbaViewExamlpe extends React.Component {
       ]
     };
     render () {
+      const { navigation } = this.props
+      const title = navigation.getParam('title', 'NO-ID')
+      const otherParam = navigation.getParam('otherParam', 'default...value')
+      alert(title + ' ' + otherParam)
       return (
         <TabView
           navigationState={this.state}
