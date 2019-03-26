@@ -17,6 +17,9 @@ import SectionOneView from '../Others/HomeSectionOne'
 import SectionThereView from '../Others/HomeSectioThere'
 import SectionTwoView from '../Others/HomeSectionTwo'
 import MyTestList from '../Others/MyTestList'
+import { TEST_URL } from '../Common/contant'
+// import HeadTopView from './HomeHeaderView'
+
 var Dimensions = require('Dimensions')
 var screenWidth = Dimensions.get('window').width
 var REQUEST_URL =
@@ -28,7 +31,8 @@ export default class Home extends Component {
     super(props)
     this.state = {
       data: [],
-      loaded: false
+      loaded: false,
+      currentPage: 0
     }
     this.fetchData = this.fetchData.bind(this)
     this.onPressItem = this.onPressItem.bind(this)
@@ -41,7 +45,7 @@ export default class Home extends Component {
   }
 
   fetchData () {
-    fetch(REQUEST_URL)
+    fetch(TEST_URL)
       .then(response => response.json())
       .then(responseData => {
         this.setState({
@@ -59,11 +63,9 @@ export default class Home extends Component {
 
   }
   onPressItem (message) {
-    // Alert.alert('点击了' + message)
-    // this.props.navigation.push('testPush')
     this.props.navigation.navigate('testPush', {
-      title: '传进来的参数',
-      otherParam: '呜哈哈'
+      title: message.toString(),
+      otherParam: this.state.data[0].year + '年' + this.state.data[0].title + '主演的电影'
     })
   }
 
@@ -72,21 +74,33 @@ export default class Home extends Component {
       return this.renderLoadingView()
     }
     return (
-      <ScrollView style={styles.scrollStyle}>
-        <View style={styles.containStyle}>
-          <View style={styles.sectionOne}>
-            <SectionOneView />
+      <View>
+        <ScrollView style={styles.scrollStyle}
+          onMomentumScrollEnd={(e) => { this.updateCurrentPage(e) }}
+        >
+          <View style={styles.containStyle}>
+            <View style={styles.sectionOne}>
+              <SectionOneView />
+              {/* <HeadTopView /> */}
+            </View>
+            <View style={styles.sectionTwo}>
+              <CoinView />
+            </View>
+            <View style={styles.sectionThere}>
+              <SectionThereView data={this.state.data} onPressItem={this.onPressItem} />
+              {/* <MyTestList /> */}
+            </View>
           </View>
-          <View style={styles.sectionTwo}>
-            <CoinView />
-          </View>
-          <View style={styles.sectionThere}>
-            <SectionThereView data={this.state.data} onPressItem={this.onPressItem} />
-            {/* <MyTestList /> */}
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     )
+  }
+  updateCurrentPage (e) {
+    var offset = e.nativeEvent.contentOffset.x
+    var page = Math.floor(offset / screenWidth)
+    this.setState({
+      currentPage: page
+    })
   }
   renderLoadingView () {
     return (

@@ -21,7 +21,7 @@ let data2 = [
   { type: '旅游', name: 'myDeeds', id: 7 }
 
 ]
-export default class SectionOneView extends Component {
+export default class SectionTwoView extends Component {
   _keyExtractor = (item, index) => item.name;
 
   constructor (props) {

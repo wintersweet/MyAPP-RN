@@ -55,7 +55,7 @@ export default class HomeSectionThere extends Component {
     )
   }
   onPressItem = (id: string) => {
-    console.log('测试方法id')
+    console.log('测试方法---==' + id)
     this.props.onPressItem(this.props.id)
   }
   refreshing () {

@@ -8,8 +8,11 @@ import {
   FlatList
 } from 'react-native'
 import VectorIcon from 'react-native-vector-icons/MaterialIcons'
+import { ScrollView } from 'react-native-gesture-handler'
+import SectionOneView from './HomeSectionTwo'
 var Dimensions = require('Dimensions')
 var screenWidth = Dimensions.get('window').width
+var headerData = require('../Home/HeaderViewData.json')
 
 let data2 = [
   { type: '美食', name: 'feedBack', id: 1 },
@@ -19,9 +22,9 @@ let data2 = [
   { type: 'KYV', name: 'law', id: 5 },
   { type: '丽人', name: 'customerService', id: 6 },
   { type: '旅游', name: 'myDeeds', id: 7 }
-
 ]
-export default class SectionOneView extends Component {
+
+class SectionOneViewT extends Component {
   _keyExtractor = (item, index) => item.id;
 
   constructor (props) {
@@ -53,7 +56,61 @@ export default class SectionOneView extends Component {
     )
   }
 }
-
+export default class ContentView extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      currentPage: 0
+    }
+  }
+  render () {
+    return (
+      <View style={styles.containerStyle}>
+        <ScrollView contentContainerStyle={styles.scrollViewStyle}
+          ref={'scrollView'}
+          horizontal
+          pagingEnabled
+          onMomentumScrollEnd={(e) => { this.updateCurrentPage(e) }}
+          showsHorizontalScrollIndicator={false}
+        >
+          {this.renderScrollItem()}
+        </ScrollView>
+        <View style={styles.dotViewStyle}>
+          {this.getAllDots()}
+        </View>
+      </View>
+    )
+  }
+  renderScrollItem () {
+    var arr = []
+    for (var i = 0; i < headerData.length; i++) {
+      var data = headerData[i]
+      arr.push(
+        <SectionOneViewT
+        />
+      )
+    }
+    return arr
+  }
+  getAllDots () {
+    var dotArr = []
+    var style
+    for (var i = 0; i < headerData.length; i++) {
+      style = (i === this.state.currentPage) ? { color: 'orange' } : { color: 'gray' }
+      dotArr.push(
+        <Text key={i} style={[{ fontSize: 25 }, style]}>&bull;</Text>
+      )
+    }
+    return dotArr
+  }
+  updateCurrentPage (e) {
+    var offset = e.nativeEvent.contentOffset.x
+    var page = Math.floor(offset / screenWidth)
+    this.setState({
+      currentPage: page
+    })
+  }
+}
 const styles = StyleSheet.create({
   contain: {
     flex: 1,
